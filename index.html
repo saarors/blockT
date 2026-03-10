@@ -162,7 +162,7 @@
       let powerUps = [];
       let frameCount = 0;
       let gameSpeed = 5;
-
+      let speedLevel = 0;
       const keys = {};
       let touchX = null;
       let touchY = null;
@@ -302,7 +302,6 @@
           ctx.arc(this.x, this.y, 12, 0, Math.PI * 2);
           ctx.fill();
 
-          // סימן פנימי
           ctx.fillStyle = "#000";
           ctx.font = "bold 12px Arial";
           ctx.textAlign = "center";
@@ -342,16 +341,16 @@
       }
 
       function init() {
-        resize();
-        player = new Player();
-        obstacles = [];
-        particles = [];
-        powerUps = [];
-        score = 0;
-        gameSpeed = 5;
-        frameCount = 0;
-        gameState = "PLAYING";
-
+  resize();
+  player = new Player();
+  obstacles = [];
+  particles = [];
+  powerUps = [];
+  score = 0;
+  gameSpeed = 5;
+  speedLevel = 0;
+  frameCount = 0;
+  gameState = "PLAYING";
         scoreVal.innerText = score;
         startScreen.classList.add("hidden");
         gameOverScreen.classList.add("hidden");
@@ -376,7 +375,12 @@
 
         frameCount++;
 
-        if (frameCount % 500 === 0) gameSpeed *= 2;
+        let currentLevel = Math.floor(score / 500);
+
+if (currentLevel > speedLevel) {
+  gameSpeed *= 1.5;
+  speedLevel = currentLevel;
+}
 
         if (frameCount % Math.max(5, Math.floor(40 - gameSpeed)) === 0) {
           obstacles.push(new Obstacle());
@@ -535,6 +539,7 @@ function pauseGame() {
   </body>
 
 </html>
+
 
 
 
