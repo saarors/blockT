@@ -376,7 +376,7 @@
 
         frameCount++;
 
-        if (frameCount % 500 === 0) gameSpeed += 100;
+        if (frameCount % 500 === 0) gameSpeed *= 2;
 
         if (frameCount % Math.max(5, Math.floor(40 - gameSpeed)) === 0) {
           obstacles.push(new Obstacle());
@@ -535,5 +535,6 @@ function pauseGame() {
   </body>
 
 </html>
+
 
 
